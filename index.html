@@ -22,9 +22,9 @@
     </div>
         <!-- Logo -->
         <div class="navbar-logo">
-  
-            <img src="imagens/logo2.jpeg">
-
+            <a href="index.html">
+              <img src="imagens/logo2.jpeg">
+            </a>
         </div>
 
         <!-- Menu -->
@@ -64,50 +64,49 @@
 </section>
 
     <!-- SERVIÇOS -->
-    <section id="servicos" class="section section-dark">
-    <div class="container">
-        <h2 class="section-title">Nossos Serviços</h2>
+    <section id="servicos" class="section">
+  <div class="container">
+    <h2 class="section-title">Nossos Serviços</h2>
 
-        <div class="services-grid">
+    <div class="services-grid">
 
-            <div class="service-card">
-                <h3>Estruturas Metálicas</h3>
-                <img src="imagens/estrutura.jpeg" alt="Estruturas Metálicas" loading="lazy">
-            </div>
+  <a href="catalogo.html#corrimaos" class="service-card">
+    <h3>Corrimãos</h3>
+    <img src="imagens/Corrimãos/corrimão38.jpeg">
+  </a>
 
-            <div class="service-card">
-                <h3>Guarda-corpos e Corrimãos</h3>
-                <img src="imagens/guarda-corpo.jpeg" alt="Guarda-corpos e Corrimãos" loading="lazy">
-            </div>
+  <a href="catalogo.html#guardacorpos" class="service-card">
+    <h3>Guarda-corpos</h3>
+    <img src="imagens/guarda-corpo.jpeg">
+  </a>
 
-            <div class="service-card">
-                <h3>Adegas</h3>
-                <img src="imagens/adega.jpeg" alt="Adegas" loading="lazy">
-            </div>
+  <a href="catalogo.html#adegas" class="service-card">
+    <h3>Adegas</h3>
+    <img src="imagens/adega.jpeg">
+  </a>
 
-            <div class="service-card">
-                <h3>Aparadores</h3>
-                <img src="imagens/aparador02.jpeg" alt="Aparadores" loading="lazy">
-            </div>
-        <div class="services-row-center">
-            
+  <a href="catalogo.html#divisorias" class="service-card">
+    <h3>Divisórias</h3>
+    <img src="imagens/grade.jpeg">
+  </a>
 
-            <div class="service-card">
-                <h3>Molduras com Espelhos</h3>
-                <img src="imagens/espelhos.jpeg" alt="Molduras com Espelhos" loading="lazy">
-            </div>
+  <a href="catalogo.html#espelhos" class="service-card">
+    <h3>Molduras com Espelhos</h3>
+    <img src="imagens/espelhos.jpeg">
+  </a>
 
-            <div class="service-card">
-                <h3>Linha de Churrasco</h3>
-                <img src="imagens/churrasco.jpeg" alt="Linha de Churrasco" loading="lazy">
-            </div>
-            <div class="service-card">
-                <h3>Divisórias</h3>
-                <img src="imagens/grade.jpeg" alt="Grades" loading="lazy">
-            </div>
+  <a href="catalogo.html#churrasco" class="service-card">
+    <h3>Linha de Churrasco</h3>
+    <img src="imagens/churrasco.jpeg">
+  </a>
+
+  <a href="catalogo.html#mesas" class="service-card">
+    <h3>Mesas e Aparadores</h3>
+    <img src="imagens/aparador02.jpeg">
+  </a>
+
 </div>
-        </div>
-    </div>
+  </div>
 </section>
 <div class="divider">
 <svg class="curva" viewBox="0 0 1440 120" preserveAspectRatio="none">
@@ -209,26 +208,31 @@ const navLinks = document.querySelectorAll(".navbar-menu a");
 window.addEventListener("scroll", () => {
 
     let scrollY = window.pageYOffset;
+    let current = "";
 
     sections.forEach(section => {
 
-        const sectionHeight = section.offsetHeight;
         const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute("id");
 
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-
-            navLinks.forEach(link => {
-                link.classList.remove("active");
-
-                if(link.getAttribute("href") === "#" + sectionId){
-                    link.classList.add("active");
-                }
-
-            });
-
+        if(scrollY >= sectionTop && scrollY < sectionTop + sectionHeight){
+            current = sectionId;
         }
 
+    });
+
+    // 🔥 CORREÇÃO: chegou no final da página → ativa contato
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+        current = "contato";
+    }
+
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+
+        if(link.getAttribute("href") === "#" + current){
+            link.classList.add("active");
+        }
     });
 
 });
